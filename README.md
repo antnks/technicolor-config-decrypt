@@ -34,10 +34,11 @@ Decryption using command line: extract aes data and decrypt using hex values
 
 ```
 dd if=config.bin bs=1 skip=246 count=16 > iv.bin
-dd if=config.bin bs=1 skip=262 count=FILE-SIZE-MINUS-20> config.aes
+dd if=config.bin bs=1 skip=262 count=FILE-SIZE-MINUS-20-MINUS-262 > config.aes
 openssl enc -aes-256-cbc -nosalt -d -in config.aes \
 -K '72ab46c7e90c66feb4af261437bd738204c640dc7f0b9959ea18d582b6876783' -iv 'c6b1c0aac15c13e5ab18a8aabafc14e0'
 ```
+In this example the header size was 246. Take the file size, substract 246+16+20
 
 ## Header example
 ```
