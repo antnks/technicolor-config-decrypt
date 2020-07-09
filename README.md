@@ -30,6 +30,14 @@ Also, the key may be exctracted from `mtd5` using this method: [https://github.c
 
 ## Decryption
 
+Decryption using command line: extract aes data and decrypt using hex values
+
+```
+dd if=config.bin bs=1 skip=246 count=16 > iv.bin
+dd if=config.bin bs=1 skip=262 count=FILE-SIZE-MINUS-20> config.aes
+openssl enc -aes-256-cbc -nosalt -d -in config.aes \
+-K '72ab46c7e90c66feb4af261437bd738204c640dc7f0b9959ea18d582b6876783' -iv 'c6b1c0aac15c13e5ab18a8aabafc14e0'
+```
 
 ## Header example
 ```
