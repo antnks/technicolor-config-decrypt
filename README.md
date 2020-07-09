@@ -40,6 +40,8 @@ openssl enc -aes-256-cbc -nosalt -d -in config.aes \
 ```
 In this example the header size was 246. Take the file size, substract 246+16+20
 
+The hex value of `-K` come from your router, `-iv` comes from config.bin
+
 ## Header example
 ```
 PREAMBLE=THENC
