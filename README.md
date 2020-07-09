@@ -26,13 +26,12 @@ HEADER + IV + DATA + SIGNATURE
 The key is located in `/proc/rip/0108`. First 32 bytes used for AES encryption, entire 64 bytes are used for HMAC.
 Also, the key may be exctracted from `mtd5` using this method: [https://github.com/pedro-n-rocha/secr](https://github.com/pedro-n-rocha/secr)
 
-## Encryption
-
 ## Decryption
 
 Decryption using command line: extract aes data and decrypt using hex values
 
 ```
+dd if=config.bin bs=1 count=246 > header.txt
 dd if=config.bin bs=1 skip=246 count=16 > iv.bin
 dd if=config.bin bs=1 skip=262 count=FILE-SIZE-MINUS-20-MINUS-262 > config.aes
 openssl enc -aes-256-cbc -nosalt -d -in config.aes \
@@ -41,6 +40,27 @@ openssl enc -aes-256-cbc -nosalt -d -in config.aes \
 In this example the header size was 246. Take the file size, substract 246+16+20
 
 The hex value of `-K` come from your router, `-iv` comes from config.bin
+
+## Encryption
+
+Encrypt config.txt:
+```
+openssl enc -aes-256-cbc -nosalt -in config.txt \
+-K '72ab46c7e90c66feb4af261437bd738204c640dc7f0b9959ea18d582b6876783' -iv 'c6b1c0aac15c13e5ab18a8aabafc14e0' > config2.aes
+```
+Concatenate HEADER, IV and DATA:
+```
+cat header.txt iv.bin config2.aes > config2.data
+```
+Calculate HMAC-SHA1 digest:
+```
+dgst -sha1 -mac hmac -macopt hexkey:72ab46c7e90c66feb4af261437bd738204c640dc7f0b9959ea18d582b687678372ab46c7e90c66feb4af261437bd738204c640dc7f0b9959ea18d582b6876783 -binary < config2.data > signature.bin
+```
+Assemble config file:
+```
+cat config2.data signature.bin > config2.bin
+```
+Note, taht for aes encryption you should use the first 32 bytes of the key, but for signature - all the 64.
 
 ## Header example
 ```
@@ -82,3 +102,7 @@ SIGNATUREKEY=GW
 ..
 ```
 Here, IV is `c6b1c0aac15c13e5ab18a8aabafc14e0`, next goes encrypted data, 20 bytes at the end will be the signature
+
+## Python PoC
+
+to be uploaded
