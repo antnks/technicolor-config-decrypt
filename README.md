@@ -60,7 +60,7 @@ Assemble config file:
 ```
 cat config2.data signature.bin > config2.bin
 ```
-Note, taht for aes encryption you should use the first 32 bytes of the key, but for signature - all the 64.
+Note, that for aes encryption you should use the first 32 bytes of the key, but for signature - all the 64.
 
 ## Header example
 ```
