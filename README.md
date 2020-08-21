@@ -113,4 +113,12 @@ Upload the config and press the WPS button - you should receive a remote shell w
 
 ## Python PoC
 
-to be uploaded
+Assuming you have root shell access.
+
+1. Save the encryption file: `dd if=/proc/rip/0108 of=proc_rip_0108`.
+2. Download your config file through the WEB UI. It is going to be a binary file `config.bin`.
+3. Suddenly, your ISP pushes an update and kicks you out.
+4. Run the exploit: `./exploit_config.py`
+5. Import the `config_patched.bin`
+6. After the rooter reboots press the WPS button
+7. Login into SSH as `root:root`. Change the password immediately
