@@ -115,7 +115,7 @@ Upload the config and press the WPS button - you should receive a remote shell w
 
 Assuming you have root shell access.
 
-1. Save the encryption file: `dd if=/proc/rip/0108 of=proc_rip_0108`.
+1. Save the encryption file: `dd if=/proc/rip/0108 of=proc_rip_0108`. Copy that file off the router.
 2. Download your config file through the WEB UI. It is going to be a binary file `config.bin`.
 3. Suddenly, your ISP pushes an update and kicks you out.
 4. Run the exploit: `./exploit_config.py`
