@@ -120,5 +120,7 @@ Assuming you have root shell access.
 3. Suddenly, your ISP pushes an update and kicks you out.
 4. Run the exploit: `./exploit_config.py`
 5. Import the `config_patched.bin`
-6. After the rooter reboots press the WPS button
-7. Login into SSH as `root:root`. Change the password immediately
+6. Start a reverse shell listener on 192.168.1.69: `nc -lnvp 1337`
+7. After the rooter reboots press the WPS button
+8. You should receive a reverse shell
+
